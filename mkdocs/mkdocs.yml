@@ -67,7 +67,7 @@ plugins:
 
             Begin: Začátek
             Setup: Nastavení
-            SetupCalibrations: Prvotní nastavení kalibrace
+            Setup Calibrations: Prvotní kalibrace
             Recommendations: Doporučení
 
             Configuration: Konfigurace

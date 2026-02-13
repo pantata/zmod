@@ -28,7 +28,7 @@ chroot /usr/data/.mod/.zmod/
 /opt/config/mod/.shell/tar_config.sh
 ```
 
-## Proč vás žádám, abyste vytvořili lístky — vysvětlení jednoduše
+## Proč vás žádám, abyste vytvořili tikety — jednoduché vysvětlení
 
 Představte si, že vaše tiskárna je auto.
 
