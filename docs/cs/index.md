@@ -38,7 +38,7 @@ Zde je, co získáte instalací ZMOD:
 - **Spektrogram řemenů**: Diagnostikuje stav řemenů pro prediktivní údržbu.
 - **Nastavení sklonu šroubů**: Plně vyrovnejte podložku za méně než 10 minut.
 
-#### 3. Inteligentní funkce spolehlivosti
+#### 3. Funkce pro zvýšení spolehlivosti
 **Tovární firmware**: Základní detekce docházejícího filamentu. Žádné kontroly integrity firmwaru nebo souborů → možné zaseknutí tisku.
 **ZMOD**:
 

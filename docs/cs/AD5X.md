@@ -154,10 +154,30 @@ Pro zakázání automatického vkládání filamentu do extruderu použijte glob
 SAVE_ZMOD_DATA AUTOINSERT=0
 ```
 
-Chcete-li zakázat vypouštění filamentu do koše při tisku, použijte parametr [USE_TRASH_ON_PRINT](Global.md#use_trash_on_print).
+Chcete-li při tisku zakázat vypouštění filamentu do odpadní nádobky, použijte parametr [USE_TRASH_ON_PRINT](Global.md#use_trash_on_print).
+
+- 0 - Vypouštění se neprovede; tisková hlava se vrátí přímo do čistící věže. Použijte společně s volbou „Purge in prime tower“ a dalšími možnostmi čištění.
+- 1 - Vypouštění proběhne během změny barvy; při změně barvy se provedou dvě vypuštění o délce definované hodnotou filament_drop_length v souboru filament.json. Poté se tisková hlava vrátí do čistící věže.
+- 2 - Tisková hlava se přesune k odpadní nádobce, ale filament nevypustí. Čištění je plně na sliceru; to vyžaduje správně nastavený G-code pro změnu filamentu.
 
 ```gcode
 SAVE_ZMOD_DATA USE_TRASH_ON_PRINT=0
+```
+
+Během změny barvy v čistící věži může z trysky unikat filament, což způsobuje tvorbu kapek. Chcete-li tento efekt omezit v počátečních vrstvách, použijte parametr [NOPOOP_TRASH_SKIP_HEIGHT](Global.md#nopoop_trash_skip_height). Pokud je tato volba povolena, tisková hlava se během změny barvy stále přesune k odpadní nádobce, ale bez vypouštění filamentu, a pokusí se případný únik setřít tak, aby spadl do nádobky. Vypouštění se v tomto režimu neprovádí.
+
+```gcode
+SAVE_ZMOD_DATA NOPOOP_TRASH_SKIP_HEIGHT=0.6
+```
+
+Do vlastního startovacího G-code lze přidat kontrolu, zda je nativní obrazovka povolena nebo zakázána, a jaké hodnoty parametrů  USE_TRASH_ON_PRINT a NOPOOP_TRASH_SKIP_HEIGHT jsou aktuálně nastavené. Pomocí parametru  [validate_print_settings_auto_change](Global.md#validate_print_settings_auto_change) můžete určit, jak se tiskárna zachová, pokud kontrola selže.
+
+- 0 - Pokud jsou parametry nesprávné, přerušte tisk a zobrazit chybu.
+- 1 - Pokud jsou parametry nesprávné, automaticky je změnit. (Není možné automaticky přepínat mezi nativní obrazovkou povolenou nebo zakázanou; to stále zobrazí chybu a zastaví tisk.)
+- 2 - Pokud jsou parametry nesprávné, zobrazit varování v konzoli a pokračovat s tiskem.
+
+```gcode
+SAVE_ZMOD_DATA VALIDATE_PRINT_SETTINGS_AUTO_CHANGE=1
 ```
 
 Chcete-li po dokončení tisku vysunout filament, použijte parametr [REMOVE_FILAMENT](Global.md#remove_filament).
@@ -202,7 +222,6 @@ Když je narazen na příkaz ke změně barvy, pokud indikuje přepnutí na již
 ```gcode
 SAVE_ZMOD_DATA ALWAYS_FULL_COLOR_CHANGE=0
 ```
-
 
 ---
 

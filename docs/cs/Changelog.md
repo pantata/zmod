@@ -186,7 +186,7 @@ Podpora jazyků rozhraní:
 ### Verze 1.4.2
 
 - Vylepšená [detekce kolize trysky](Global.md#nozzle_control) s volitelnou pauzou místo vypnutí. Problém [#23](https://github.com/ghzserg/zmod/issues/23).
-!!! note
+!!! poznámka
     
 - Kontrola trysky nefunguje na AD5X viz zde[#75](https://github.com/ghzserg/zmod/discussions/75#discussion-8196449)
 - Vylepšená funkce kontroly systému.
