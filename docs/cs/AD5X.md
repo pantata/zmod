@@ -37,7 +37,7 @@ Rozdíly oproti AD5M:
 *   **Vždy používejte** `FAST_CLOSE_DIALOGS` (rychlé zavírání) místo `CLOSE_DIALOGS` (pomalé zavírání).
 *   Makro `NEW_SAVE_CONFIG` **nefunguje**.
 *   Pro povolení kamery použijte ```CAMERA_ON VIDEO=video3``` nebo ```CAMERA_ON VIDEO=video0``` nebo ```CAMERA_ON VIDEO=video99```.
-*   Klipper může spadnout. Řešení: 'Process Profile' -> 'Other' -> 'Output G-code' -> 'Exclude Models', zrušte zaškrtnutí.
+*   Klipper může spadnout. Řešení: v Orca Sliceru otevřete „Process Profile“ → „Other“ → „Output G-code“ → „Exclude Models“ a zrušte zaškrtnutí.
 
 ---
 
@@ -45,7 +45,7 @@ Rozdíly oproti AD5M:
 
 [Odeslat soubory přes "Octo/Klipper" pro tisk](Recomendations.md#send-files-via-octoklipper-for-printing)
 
-**Musíte odstranit nepoužívané cívky ze seznamu v Orce.**
+**Musíte v Orca Sliceru odstranit nepoužívané cívky ze seznamu.**
 
 **Příklad:**
 Tiskárna má 4 cívky (č. 1, č. 2, č. 3, č. 4). K tisku jsou potřeba pouze cívky č. 1 a č. 3.
@@ -91,12 +91,12 @@ Můžete provést čtyři akce:
 
 <img width="800" height="480" alt="screenshot" src="https://github.com/user-attachments/assets/f51f91a2-4131-4ba3-a8a0-3b9519f61f6d" />
 
-3.  Po výběru se vrátíte do menu a barva cívky **by se měla aktualizovat**.
+3.  Po výběru se vrátíte do menu a barva cívky by se měla aktualizovat.
 <img width="556" height="545" alt="image" src="https://github.com/user-attachments/assets/f32a9239-44c6-449d-bbf7-5f453f149ef7" />
 
 <img width="800" height="480" alt="screenshot" src="https://github.com/user-attachments/assets/4fa7bb58-ee03-4613-ba06-a5af9b2ddfa6" />
 
-**Pokud se barva nezmění:** Zavřete okno tlačítkem „X“ a restartujte makro `COLOR`. Někdy se obrazovka neobnoví okamžitě.
+**Pokud se barva nezmění, zavřete okno tlačítkem „X“ a spusťte makro `COLOR` znovu. Někdy se obrazovka neobnoví okamžitě.**
 
 **Jak změnit typ materiálu:**
 
@@ -106,7 +106,7 @@ Můžete provést čtyři akce:
 
 <img width="800" height="480" alt="screenshot" src="https://github.com/user-attachments/assets/2d7b4f12-a8f1-4c99-a555-7c422bd5ffe4" />
 
-**Pokud se typ nezmění:** Zavřete okno tlačítkem „X“ a restartujte makro `COLOR`. Někdy se obrazovka neobnoví okamžitě.
+**Pokud se typ nezmění, zavřete okno tlačítkem „X“ a spusťte makro `COLOR` znovu. Někdy se obrazovka neobnoví okamžitě.**
 
 **Tip:** Pokud je více cívkám přiřazena **stejná barva a typ materiálu**, tiskárna se automaticky přepne na další cívku, když současná dojde. Toto se nazývá **„nekonečný režim cívek“**.
 
@@ -119,7 +119,7 @@ Toto okno se otevře **automaticky** při spuštění tisku.
 
 <img width="800" height="480" alt="screenshot" src="https://github.com/user-attachments/assets/f1ad0f49-e2bd-43c8-9301-7c58b9c05c22" />
 
-**Jak interpretovat zobrazení:**
+**Jak interpretovat zobrazené informace:**
 
 *   `Cube.gcode` – Název tištěného souboru.
 *   `T0` – První barva v souboru. Tiskne se pomocí **cívky č. 4** (oranžová PLA).
@@ -127,9 +127,9 @@ Toto okno se otevře **automaticky** při spuštění tisku.
 *   `T2` – Třetí barva. Tiskne se pomocí **cívky č. 2** (zelená PLA).
 *   `T3` – Čtvrtá barva. Tiskne se také pomocí **cívky č. 2** (zelená PLA).
 
-**Pro změnu cívky pro barvu během tisku:**
+**Chcete-li během tisku změnit cívku pro danou barvu:**
 
-*   Jednoduše **klikněte na cílové T** (např. T1) a vyberte jinou cívku ze seznamu.
+*   Jednoduše klikněte na požadované T (např. T1) a vyberte jinou cívku ze seznamu.
 <img width="553" height="550" alt="image" src="https://github.com/user-attachments/assets/4d831fdb-6ff5-4a0d-ac9e-10154d1c7956" />
 
 <img width="800" height="480" alt="screenshot" src="https://github.com/user-attachments/assets/a87d6115-87e4-4cb1-af3e-b194edefb42b" />
@@ -138,7 +138,7 @@ Toto okno se otevře **automaticky** při spuštění tisku.
 
 ### Globální parametry AD5X
 
-Abyste zabránili zobrazení dialogu pro výběr barvy na začátku tisku, použijte globální parametr [SILENT](Global.md#silent):
+Chcete-li zabránit zobrazení dialogu pro výběr barvy na začátku tisku, použijte globální parametr [SILENT](Global.md#silent):
 
 - 0 – zobrazit dialog (výchozí)
 - 1 – nezobrazovat dialog, použít dříve nastavené barvy
@@ -154,10 +154,30 @@ Pro zakázání automatického vkládání filamentu do extruderu použijte glob
 SAVE_ZMOD_DATA AUTOINSERT=0
 ```
 
-Chcete-li zakázat vypouštění filamentu do koše při tisku, použijte parametr [USE_TRASH_ON_PRINT](Global.md#use_trash_on_print).
+Chcete-li při tisku zakázat vypouštění filamentu do odpadní nádobky, použijte parametr [USE_TRASH_ON_PRINT](Global.md#use_trash_on_print).
+
+- 0 – Vypouštění se neprovede; tisková hlava se vrátí přímo do čistící věže. Použijte společně s volbou „Purge in prime tower“ a dalšími možnostmi čištění.
+- 1 – Vypouštění proběhne během změny barvy; při změně barvy se provedou dvě vypuštění o délce definované hodnotou filament_drop_length v souboru filament.json. Poté se tisková hlava vrátí do čistící věže.
+- 2 – Tisková hlava se přesune k odpadní nádobce, ale filament nevypustí. Čištění je plně na sliceru; to vyžaduje správně nastavený G-code pro změnu filamentu.
 
 ```gcode
 SAVE_ZMOD_DATA USE_TRASH_ON_PRINT=0
+```
+
+Během změny barvy v čistící věži může z trysky unikat filament, což může způsobovat kapání. Chcete-li tento efekt omezit v počátečních vrstvách, použijte parametr [NOPOOP_TRASH_SKIP_HEIGHT](Global.md#nopoop_trash_skip_height). Pokud je tato volba povolena, tisková hlava se během změny barvy stále přesune k odpadní nádobce, ale bez vypouštění filamentu, a pokusí se případný únik setřít tak, aby spadl do nádobky. Vypouštění se v tomto režimu neprovádí.
+
+```gcode
+SAVE_ZMOD_DATA NOPOOP_TRASH_SKIP_HEIGHT=0.6
+```
+
+Do vlastního startovacího G-code můžete přidat kontrolu, zda je nativní obrazovka povolená nebo zakázaná, a jaké hodnoty parametrů USE_TRASH_ON_PRINT a NOPOOP_TRASH_SKIP_HEIGHT jsou aktuálně nastavené. Pomocí parametru [validate_print_settings_auto_change](Global.md#validate_print_settings_auto_change) můžete určit, jak se tiskárna zachová, pokud kontrola selže.
+
+- 0 – Pokud jsou parametry nesprávné, přeruší tisk a zobrazí chybu.
+- 1 – Pokud jsou parametry nesprávné, automaticky je změní. (Není možné automaticky přepínat mezi nativní obrazovkou povolenou nebo zakázanou; to stále zobrazí chybu a zastaví tisk.)
+- 2 – Pokud jsou parametry nesprávné, zobrazí varování v konzoli a pokračuje v tisku.
+
+```gcode
+SAVE_ZMOD_DATA VALIDATE_PRINT_SETTINGS_AUTO_CHANGE=1
 ```
 
 Chcete-li po dokončení tisku vysunout filament, použijte parametr [REMOVE_FILAMENT](Global.md#remove_filament).
@@ -203,14 +223,13 @@ Když je narazen na příkaz ke změně barvy, pokud indikuje přepnutí na již
 SAVE_ZMOD_DATA ALWAYS_FULL_COLOR_CHANGE=0
 ```
 
-
 ---
 
 ## **5. Jak ručně sdělit tiskárně, která cívka je vložena**
 
 Někdy ručně změníte cívku, ale tiskárna to nerozpozná a zobrazuje zastaralé informace.
 
-K nápravě použijte specializovaný příkaz.
+K nápravě použijte tento příkaz:
 
 **Zadejte tuto frázi do konzole:**
 
@@ -234,7 +253,7 @@ Po tomto příkazu bude tiskárna vědět, která cívka je aktivní, a nebude m
 
 ## **6. Jak konfigurovat odpadní filament při výměně filamentu**
 
-Tato nastavení pomáhají snížit plýtvání plastem při přepínání cívek. Chcete-li je upravit, nejprve **vypněte nativní obrazovku tiskárny** pomocí makra `DISPLAY_OFF`.
+Tato nastavení pomáhají snížit plýtvání filamentem při přepínání cívek. Chcete-li je upravit, nejprve **vypněte nativní obrazovku tiskárny** pomocí makra `DISPLAY_OFF`.
 
 V režimu vypnuté obrazovky jsou povoleny tyto senzory:
 
@@ -258,22 +277,22 @@ V tomto souboru má každý typ materiálu (PLA, ABS, PETG atd.) seznam hodnot. 
 
 Aby tato nastavení fungovala, musíte **vypnout nativní displej tiskárny** pomocí makra `DISPLAY_OFF`.
 
-1.  **`temp`** — Teplota trysky pro výměnu filamentu. **Výchozí hodnota závisí na typu materiálu.**
-2.  **`filament_drop_length` (Délka čištění)**
+1. **`temp`** — Teplota trysky pro výměnu filamentu. **Výchozí hodnota závisí na typu materiálu.**
+2. **`filament_drop_length` (Délka čištění)**
 
-    *   **Jednoduše řečeno:** Kolik milimetrů filamentu tiskárna vytlačí do odpadní nádobky, aby **vyčistila trysku** od předchozí barvy.
-    *   **Tip:** Zvyšte tuto hodnotu, pokud se barvy míchají při výměně cívek. Snižte ji, abyste snížili odpad.
+    - **Jednoduše řečeno:** Kolik milimetrů filamentu tiskárna vytlačí do odpadní nádobky, aby **vyčistila trysku** od předchozí barvy.
+    - **Tip:** Zvyšte tuto hodnotu, pokud se barvy míchají při výměně cívek. Snižte ji, abyste snížili odpad.
 
-3.  **`filament_drop_length_add` (Dodatečné čištění)**
+3. **`filament_drop_length_add` (Dodatečné čištění)**
 
-    *   **Jednoduše řečeno:** Extra délka čištění při přechodu mezi **typy materiálů** (např. z PLA na PETG), nejen barvami.
-    *   **Proč je to potřeba:** Různé materiály se špatně mísí, proto je nutné hlubší čištění trysky.
+    - **Jednoduše řečeno:** Dodatečná délka čištění při přechodu mezi **typy materiálů** (např. z PLA na PETG), nejen barvami.
+    - **Proč je to potřeba:** Různé materiály se špatně mísí, proto je nutné hlubší čištění trysky.
 
-4.  **`nozzle_cleaning_length`** — Délka (v mm) filamentu vytaženého z extruderu při čištění trysky, když se cívka již nepoužívá. **Výchozí: 60 mm.**
+4. **`nozzle_cleaning_length`** — Délka (v mm) filamentu vytaženého z extruderu při čištění trysky, když se cívka již nepoužívá. **Výchozí: 60 mm.**
 
-5.  **`filament_unload_into_tube`** — Kolik filamentu vysunout z modulu 4 v 1, když se extrudér již nepoužívá. **Výchozí: 70 mm.**
+5. **`filament_unload_into_tube`** — Kolik filamentu vysunout z modulu 4 v 1, když se extrudér již nepoužívá. **Výchozí: 70 mm.**
 
-    *   Pokud máte modul 4 v 1 nové verze, zvyšte `filament_unload_into_tube` nebo v krajním případě zvyšte `nozzle_cleaning_length`
+    - Pokud máte modul 4-in-1 nové verze, zvyšte `filament_unload_into_tube` nebo v krajním případě zvyšte `nozzle_cleaning_length`
 
 ---
 
@@ -281,21 +300,26 @@ Aby tato nastavení fungovala, musíte **vypnout nativní displej tiskárny** po
 
 Aby tato nastavení fungovala, musíte **vypnout nativní displej tiskárny** pomocí makra `DISPLAY_OFF`.
 
-*   **`filament_tube_length`** — Celková délka PTFE hadičky od modulu IFS k extruderu. Užitečné pro nestandardní hadičky. **Výchozí: 1000 mm.**
-*   **`filament_unload_before_cutting`** — Vzdálenost zvednutí filamentu **před** řezáním. **Výchozí: 0 mm.**
-*   **`filament_unload_after_cutting`** — Vzdálenost zvednutí filamentu **po** řezání, před přesunem do odpadní nádobky. **Výchozí: 5 mm.**
-*   **`filament_unload_after_drop`** — Vzdálenost retrakce po čištění, aby se zabránilo odkapávání. **Výchozí: 3 mm.**
-*   **`filament_extruder_speed`** — Rychlost (v mm/min), kterou je filament zaváděn do extrudéru. **Výchozí: 300 mm/min (5 mm/s).**
-*   **`filament_ifs_speed`** — Rychlost (v mm/min), kterou pracuje modul IFS. **Výchozí: 12000 mm/min (20 mm/s).**
-*   **`filament_fan_speed`** — Rychlost ventilátoru (0–255) během čištění pro chlazení odkapávání. **Výchozí: 102.**
-*   **`filament_autoinsert_empty_length`** — Délka filamentu taženého při automatickém vkládání do prázdného extruderu. **Výchozí: 600 mm.**
-*   **`filament_autoinsert_full_length`** — Délka filamentu taženého při výměně stávajícího filamentu. **Výchozí: 550 mm.**
-*   **`filament_autoinsert_ret_length`** — Vzdálenost retrakce po spuštění senzoru extruderu (pouze prázdný extruder). **Výchozí: 90 mm.**
-*   **`filament_autoinsert_speed`** — Rychlost automatického vkládání (mm/min). **Výchozí: 1200 mm/min (20 mm/s).**
+- **`filament_tube_length`** — Celková délka PTFE hadičky od modulu IFS k extruderu. Užitečné pro nestandardní hadičky. **Výchozí: 1000 mm.**
+- **`filament_unload_before_cutting`** — Vzdálenost zvednutí filamentu **před** řezáním. **Výchozí: 0 mm.**
+- **`filament_unload_after_cutting`** — Vzdálenost zvednutí filamentu **po** řezání, před přesunem do odpadní nádobky. **Výchozí: 5 mm.**
+- **`filament_unload_after_drop`** — Vzdálenost retrakce po čištění, aby se zabránilo odkapávání. **Výchozí: 3 mm.**
+- **`filament_extruder_speed`** — Rychlost (v mm/min), kterou je filament zaváděn do extrudéru. **Výchozí: 300 mm/min (5 mm/s).**
+- **`filament_ifs_speed`** — Rychlost (v mm/min), kterou pracuje modul IFS. **Výchozí: 12000 mm/min (20 mm/s).**
+- **`filament_fan_speed`** — Rychlost ventilátoru (0–255) během čištění pro chlazení odkapávání. **Výchozí: 102.**
+- **`filament_autoinsert_empty_length`** — Délka filamentu zataženého při automatickém vkládání do prázdného extruderu. **Výchozí: 600 mm.**
+- **`filament_autoinsert_full_length`** — Délka filamentu zataženého při výměně stávajícího filamentu. **Výchozí: 550 mm.**
+- **`filament_autoinsert_ret_length`** — Vzdálenost retrakce po spuštění senzoru extruderu (pouze prázdný extruder). **Výchozí: 90 mm.**
 
-**Varování!** Úprava pokročilých parametrů může způsobit poruchy tiskárny, ucpání filamentu nebo poškození hardwaru. Upravujte pouze tehdy, pokud plně rozumíte účelu a potenciálním následkům každého parametru.
+- **`filament_autoinsert_speed`** — Rychlost automatického vkládání (mm/min). **Výchozí: 1200 mm/min (20 mm/s).**
 
-**Klíčový poznatek:** Chcete-li snížit odpad, začněte snížením **`filament_drop_length`** a **`filament_drop_length_add`** pro váš materiál. Nezapomeňte po změnách soubor uložit!
+**Varování!**
+
+Úprava pokročilých parametrů může způsobit poruchy tiskárny, ucpání filamentu nebo poškození hardwaru. Upravujte pouze tehdy, pokud plně rozumíte účelu a potenciálním následkům každého parametru.
+
+**Důležité:**
+
+Chcete-li snížit odpad, začněte snížením **`filament_drop_length`** a **`filament_drop_length_add`** pro váš materiál. Nezapomeňte po změnách soubor uložit!
 
 ## **7. Přidat vlastní typy filamentů**
 
@@ -398,12 +422,12 @@ Nahraďte **pouze** tyto hodnoty:
 
 ---
 
-### Kalibrace odpadní nádobky
+### Kalibrace odpadní nádobky (waste tray)
 
 [Alternativní verze pokynů](Setup.md#ad5x-warning)
 
 1. Zadejte příkaz `_GOTO_TRASH` — hlava tiskárny se přesune k odpadní nádobce.
-2. Pokud se nádobka nezavře. Opatrně posouvejte hlavu, dokud se nádobka nezavře. Musíte použít GCODE: ```G1 Y230.2```
+2. Pokud se nádobka nezavře, opatrně posouvejte hlavu, dokud se nezavře. Musíte použít GCODE: ```G1 Y230.2```
 3. Zkontrolujte, jakou máte nyní souřadnici **Y**.
 4. Odečtěte od tohoto čísla 229. Výsledek bude váš `yOffset`.
 
@@ -425,7 +449,7 @@ Zapište toto číslo do souboru `/rw/Adventurer5M.json`. Nádobka je zkalibrov�
 [Alternativní verze pokynů](Setup.md#ad5x-warning)
 
 1. Zadejte příkaz `_CUT_PRUTOK` — hlava se přesune k noži.
-2. Musíte použít GCODE: ```G1 Y-7.7``` ```G1 X-1.7```, posouvejte hlavu, dokud se nůž neaktivuje.
+2. Použijte G-code: ```G1 Y-7.7``` ```G1 X-1.7```, posouvejte hlavu, dokud se nůž neaktivuje.
 3. Zkontrolujte, jaké máte souřadnice X a Y.
 4. Pro **Y**:
 
@@ -552,4 +576,4 @@ Připojte:
 
 Tato chyba nastává, když nativní displej a mod přistupují k IFS současně.
 
-Nejlepší je zkrátit životnost nativního displeje na 10 sekund: ```SAVE_ZMOD_DATA DISPLAY_OFF_TIMEOUT=10```
+Doporučuje se zkrátit čas do automatického vypnutí nativního displeje na 10 sekund: ```SAVE_ZMOD_DATA DISPLAY_OFF_TIMEOUT=10```

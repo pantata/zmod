@@ -7,7 +7,7 @@ Lze jej spustit z:
 - Souboru GCODE
 - Konzole Fluidd/Mainsail (stiskněte anglické písmeno `C` ve Fluidd)
 
-!!! note
+!!! poznámka
     *Hodnota v závorkách je výchozí hodnota*
 
 ---
@@ -392,18 +392,46 @@ Určuje, zda přeskočit proces změny barvy, pokud jsou předchozí a následuj
 
 Příklad: `SAVE_ZMOD_DATA ALWAYS_FULL_COLOR_CHANGE=0`
 
+---
+
 ##### USE_TRASH_ON_PRINT
 
 Pouze AD5X
 
 Pouze při běhu bez nativního displeje
 
-Použít koš při změně barvy během tisku
+Použít koš a produkovat vypouštění při změně barvy během tisku
 
-- 0 - nepoužívat
-- 1 - používat (výchozí)
+- 0 - nepoužívat (vrátit se přímo do čistící věže)
+- 1 - používat koš a produkovat vypouštění
+- 2 - přejít do koše a vrátit ovládání sliceru, slicer je odpovědný za čištění a návrat do čistící věže
 
 Příklad: `SAVE_ZMOD_DATA USE_TRASH_ON_PRINT=0`
+
+---
+
+##### NOPOOP_TRASH_SKIP_HEIGHT
+
+Pouze AD5X
+
+Pouze při běhu bez nativního displeje
+
+Specifikuje výšku, pod kterou se tiskárna bude pohybovat k odpadní chuti i v režimu bez vypouštění (USE_TRASH_ON_PRINT = 0), aby se pokusila zabránit vytváření okapů filamentu na čistící věži na dolních vrstvách.
+
+Příklad: `SAVE_ZMOD_DATA NOPOOP_TRASH_SKIP_HEIGHT=0.6`
+
+---
+
+##### VALIDATE_PRINT_SETTINGS_AUTO_CHANGE
+
+Pouze AD5X
+
+Nastavuje chování tiskárny, když gcode soubor spuštěného sliceru obsahuje kontrolu nativní obrazovky / use_trash_on_print. Nemá žádný vliv při tisku gcode souborů bez této kontroly.
+- 0 - Přerušit tisk a zobrazit chybu, pokud jsou parametry nesprávné
+- 1 - Automaticky změnit nastavení tak, aby odpovídalo parametrům (nelze změnit povolenou / zakázanou nativní obrazovku)
+- 2 - Zobrazit varování v konzoli a pokračovat v tisku
+
+Příklad: `SAVE_ZMOD_DATA VALIDATE_PRINT_SETTINGS_AUTO_CHANGE=1`
 
 ---
 
@@ -415,7 +443,7 @@ Pouze při běhu bez nativního displeje
 
 Vysunout filament po dokončení tisku:
 
-- 0 — nevysunovat (výchozí)
+- 0 — nevysunout (výchozí)
 - 1 — vysunout
 
 Příklad: `SAVE_ZMOD_DATA REMOVE_FILAMENT=1`
@@ -471,6 +499,17 @@ Běžné příčiny chyby E0011 (Timer too close):
 
 Specifické příčiny:
 
+- Zmrznutá základní deska Nations MCU nebo eboard. `Ztracena komunikace s MCU 'mcu'`. Řešení: Restart. Vyměňte základní desku (`mcu`) nebo desku extruderu (`eboard`).
+- Přetížení CPU hostitele (výpočty shaperu/vykreslování grafů).
+- Přetížení EMMC (operace git, zálohování, nahrávání velkých souborů během tisku atd.).
+- Nedostatek RAM. Řešení: Přepájejte CPU a upgradujte na 256MB RAM.
+- Poškozený kabel extruderu. Řešení: Vyměňte/opravte kabel.
+- Uvolněné připojení kabelu desky extruderu. Řešení: Vyměňte desku extruderu.
+- Načítání dat SWAP (SWAP je na EMMC, která pracuje rychlostí 10 MB/s; data SWAP během výpočtů shaperu mohou dosáhnout 25MB). Řešení: Vypněte SWAP, pokud máte 256MB RAM pomocí `SAVE_ZMOD_DATA USE_SWAP=0`.
+- Pád firmwaru MCU. Řešení: Přeinstalujte firmware MCU pomocí [továrního resetu](Setup.md#restoring-printer-to-factory-settings-required-for-mod-installation) nebo použijte mod [UPDATE_MCU](System.md#update_mcu).
+
+Specifické příčiny:
+
 - Zamrzlá základní deska Nations MCU nebo eboard. `Ztracena komunikace s MCU 'mcu'`. Řešení: Restart. Vyměňte základní desku (`mcu`) nebo desku extruderu (`eboard`).
 - Přetížení CPU hostitele (výpočty shaperu/vykreslování grafů).
 - Přetížení EMMC (operace git, zálohování, nahrávání velkých souborů během tisku atd.).
@@ -486,6 +525,49 @@ Opravit chyby E0011 a `Communication timeout during homing`. Změna tohoto param
 - 1 - nastavit parametr na 0.1
 
 Příklad: `SAVE_ZMOD_DATA FIX_E0011=1`
+
+Tato chyba se může také objevit:
+
+- Velký objem vyloučení modelů: Řešení `Process profile` -> `Other` -> `Output G-cod` -> zrušte zaškrtnutí `Exclude models`.
+- Pokud jste vypnuli swap na FF5M/FF5MPro.
+
+  Spusťte makro `MEM` a podívejte se, zda je swap a jakou má velikost.
+
+  Povolte swap, pokud je vypnutý: `SAVE_ZMOD_DATA USE_SWAP=1`
+
+- Pokud používáte FF5M/FF5MPro, spusťte plný test. To zahrnuje kalibraci PID, odstranění mapy stolu a odstranění shaperů současně.
+
+  Je lepší provést všechny kalibrace [zde podle těchto pokynů](SetupCalibrations.md#printer-calibration-for-beginners)
+
+Chyba `Communication timeout during homing` se může objevit kvůli vysoké latenci komunikace mezi hostitelem a MCU. Doba odezvy by měla konzistentně zůstat pod 10ms. Dočasné špičky latence mohou způsobit selhání homingu.
+
+`TRSYNC_TIMEOUT` je parametr Klipperu (výchozí: 0.025 s), který kompenzuje systémové zpoždění.
+
+Tovární soubor `/opt/klipper/klippy/mcu.py` nastavuje `TRSYNC_TIMEOUT = 0.025`. Patch ho mění na `TRSYNC_TIMEOUT = 0.1`.
+
+**Jak opravit na továrním firmwaru:**
+
+- Naformátujte USB disk jako FAT32.
+- Uložte soubor `flashforge_init.sh` na USB:
+    - [Opravit parametr Adventurer5M](https://github.com/ghzserg/FF/releases/download/R/Adventurer5M-e0011-on.tgz)
+      - [Obnovit tovární parametr Adventurer5M](https://github.com/ghzserg/FF/releases/download/R/Adventurer5M-e0011-on.tgz)
+      - [Opravit parametr Adventurer5MPro](https://github.com/ghzserg/FF/releases/download/R/Adventurer5MPro-e0011-on.tgz)
+      - [Obnovit tovární parametr Adventurer5MPro](https://github.com/ghzserg/FF/releases/download/R/Adventurer5MPro-e0011-on.tgz)
+
+- Vypněte tiskárnu.
+- Vložte USB do tiskárny.
+- Zapněte tiskárnu (bude hlasitě pípat).
+- Počkejte na restart.
+- Vyjměte USB.
+- Znovu vytiskněte problematický soubor; E0011 by se již neměla objevit.
+
+**Ruční oprava na továrním firmwaru:**
+
+- Nainstalujte [root](https://wiki.zmod.link/Native_FW/#root).
+- Použijte [WinSCP](https://winscp.net/eng/download.php) pro SSH do tiskárny.
+- Upravte `/opt/klipper/klippy/mcu.py`.
+- Najděte `TRSYNC_TIMEOUT = 0.025` a změňte ho na `TRSYNC_TIMEOUT = 0.1`.
+- Uložte soubor a restartujte tiskárnu.
 
 Tato chyba se může také objevit:
 

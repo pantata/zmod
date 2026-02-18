@@ -7,7 +7,7 @@ Lze jej vyvolat z:
 - Souboru GCODE
 - Konzoly Fluidd/Mainsail (stiskněte písmeno `C` v Fluiddu)
 
-!!! note
+!!! poznámka
     *Hodnota v závorkách je výchozí hodnota*
 
 ---

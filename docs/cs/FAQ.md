@@ -1,25 +1,25 @@
 # FAQ
 ## Často kladené otázky
 
-!!! note
-    Nainstalovali jste mod.
-    
-    Nechcete nic řešit - tiskněte jako dříve.
-    
-    Není třeba nic konfigurovat ani měnit.
-    
-    Rozhodli jste se, že jste připraveni jít dál - pokračujte čtením dokumentace.
+!!! Poznámka
+    **Nainstalovali jste mod.**
+
+    - Nechcete nic řešit - tiskněte jako dříve.
+
+    - Není třeba nic konfigurovat ani měnit.
+
+    - Rozhodli jste se, že jste připraveni jít dál - pokračujte čtením dokumentace.
 
 ---
 
 ## Úložiště konfigurace
 
-Přístup do složky **mod_data** přes webové rozhraní Fluidd:
+Přístup do složky **mod_data** je možný přes webové rozhraní Fluidd:
 `Configuration` → `Configuration Files` → `mod_data`
 
-- Vlastní nastavení Klipperu patří do `mod_data/user.cfg`, které může přepsat/doplnit `printer_base.cfg` a soubory zMod.
-- Vlastní nastavení Moonrakeru patří do `mod_data/user.moonraker.conf`.
-- Vlastní MIDI soubory jsou uloženy v `mod_data/midi/`.
+- Uživatelské nastavení Klipperu vložte do `mod_data/user.cfg`, tím můžete přepsat/doplnit `printer_base.cfg` a soubory zMod.
+- Uživatelské nastavení Moonrakeru patří do `mod_data/user.moonraker.conf`.
+- Uživatelské MIDI soubory jsou uloženy v `mod_data/midi/`.
 - Globální nastavení modu se ukládají pomocí makra [SAVE_ZMOD_DATA](Global.md#save_zmod_data).
 - Skripty pro vypnutí jsou uloženy v `mod_data/power_off.sh`.
 - Skripty pro zapnutí jsou uloženy v `mod_data/power_on.sh`.
@@ -32,9 +32,9 @@ Jakoukoliv funkci lze přepsat v `mod_data/user.cfg` nebo `printer.cfg`.
 
 ## Známé zvláštnosti: {#known-peculiarities}
 
-- Během akcí jako `M109` (nahřívání extruderu), `M190` (nahřívání podložky), kalibrace PID nebo jakéhokoli úkolu pozastavujícího g-kód, se tovární obrazovka zasekne.
-- Restartování Klipperu zasekne tovární obrazovku (pro restarty použijte [NEW_SAVE_CONFIG](Main.md#new_save_config)).
-- Po zrušení tisku stiskněte "OK" na tovární obrazovce (použijte [CLOSE_DIALOGS](Main.md#close_dialogs) nebo [FAST_CLOSE_DIALOGS](Main.md#fast_close_dialogs)).
+- Během akcí jako `M109` (nahřívání extruderu), `M190` (nahřívání podložky), kalibrace PID nebo jakéhokoli úkolu pozastavujícího g-kód, nativní obrazovka přestane reagovat.
+- Při restartování Klipperu nativní obrazovku nebude reagovat na dotyk, dokud restart Klipperu neproběhne (pro restarty použijte [NEW_SAVE_CONFIG](Main.md#new_save_config)).
+- Po zrušení/ukončení tisku stiskněte "OK" na tovární obrazovce (nebo použijte [CLOSE_DIALOGS](Main.md#close_dialogs) nebo [FAST_CLOSE_DIALOGS](Main.md#fast_close_dialogs)).
 
 - Tovární obrazovka vždy načte profil `DEFAULT_MESH` při zahájení tisku a po tisku smaže profil `Default`.
 
@@ -42,10 +42,10 @@ Jakoukoliv funkci lze přepsat v `mod_data/user.cfg` nebo `printer.cfg`.
 
 ## Poznámky k verzi bez obrazovky: {#notes-on-screenless-version}
 
-- Odstraňte veškerý startovací g-kód a použijte makra [START_PRINT](Main.md#start_print) a [END_PRINT](Main.md#end_print).
+- Upravte startovací g-kód ve sliceru a použijte makra [START_PRINT](Main.md#start_print) a [END_PRINT](Main.md#end_print).
 - Tovární kamera je vypnutá; použijte alternativu přes [CAMERA_ON](Zmod.md#camera_on).
 - Ručně nastavte [Z_OFFSET] v [START_PRINT](Main.md#start_print) nebo použijte [LOAD_ZOFFSET](Global.md#load_zoffset) k načtení uložených offsetů.
-- Pokud chcete přenést z-offset z nativní obrazovky do režimu bez obrazovky, spusťte makro ```LOAD_ZOFFSET_NATIVE```, které přečte hodnotu z-offsetu z nativní obrazovky a aplikuje ji do režimu bez obrazovky.
+- Pokud chcete přenést z-offset z nativní obrazovky do režimu bez obrazovky, spusťte makro [LOAD_ZOFFSET_NATIVE](Calibrations.md#load_zoffset_native) , které přečte hodnotu z-offsetu z nativní obrazovky a zkopíruje ji do režimu bez obrazovky.
 - Mesh podložky `auto` se načítá automaticky při startu.
 - Protokol FlashForge není podporován (řeší to obrazovka). Použijte "Octo/Klipper":
     - Protokol: `Octo/Klipper`
@@ -93,10 +93,10 @@ ZMOD NENÍ založen na KlipperModu a NENÍ jeho evolucí. Nicméně, ZMOD použ�
 *   Automatické aktualizace pro `Fluidd`/`Mainsail`/`Moonraker` a ZMOD přes síť
 *   [Entware](FAQ.md#entware-in-zmod-how-to-use-it)
 *   Opravena chyba [E0017](Global.md#fix_e0017)
-*   Navíc GuppyScreen podporuje: kalibraci PID, ovládání tlumičů, rollback firmwaru, čištění trysky, reset tenzometru, nastavení šroubů, ColdPull, vylepšené vyrovnávání podložky
+*   Navíc GuppyScreen podporuje: kalibraci PID, ovládání chlazení, rollback firmwaru, čištění trysky, reset tenzometru, nastavení šroubů, ColdPull, vylepšené vyrovnávání podložky
 *   Opravena funkce ventilátorů chlazení driverů. Automaticky se zapínají, když jsou motory v chodu. V nativním firmwaru - pouze během tisku.
 *   Adaptivní vyrovnávání podložky [KAMP](Calibrations.md#kamp)
-*   Kalibrace PID pro [extruder](Calibrations.md#pid_tune_extruder) a [podložku](Calibrations.md#pid_tune_bed), včetně přes GuppyScreen
+*   Kalibrace PID pro [extruder](Calibrations.md#pid_tune_extruder) a [podložku](Calibrations.md#pid_tune_bed) je k dispozici i pro GuppyScreen
 *   Implementován [COLDPULL](Filament.md#coldpull) (čištění trysky) bez síly. Implementace [tohoto algoritmu](https://t.me/FF_5M_5M_Pro/2836/447172)
 
 #### Co je v ZMOD, ale ne v nativním firmwaru:
@@ -140,7 +140,7 @@ Bez těchto řádků obrazovka tiskárny nezná cílové teploty pro trysku a po
 
 Pokud používáte nativní obrazovku, nejsou potřeba žádné změny.
 
-Pro provoz bez nativní obrazovky/Guppy (také doporučeno s obrazovkou) nahraďte celý startovní kód za:
+Pro provoz bez nativní obrazovky/Guppy (a s nativní obrazovkou doporučeno) nahraďte celý startovní kód za:
 ```
 START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]
 M190 S[bed_temperature_initial_layer_single]
@@ -148,7 +148,7 @@ M104 S[nozzle_temperature_initial_layer]
 SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]
 ```
 
-`START_PRINT EXTRUDER_TEMP=... BED_TEMP=...` by mělo být napsáno na jednom řádku.
+`START_PRINT EXTRUDER_TEMP=... BED_TEMP=...` musí být na jednom řádku.
 
 A koncový kód za:
 ```
@@ -168,7 +168,7 @@ Přes menu obrazovky tiskárny: `Nastavení` -> `Ikona WiFi` -> `Síťový reži
 
 Přečtěte si dokumentaci k [START_PRINT](Main.md#start_print) a [SAVE_ZMOD_DATA](Global.md#save_zmod_data), abyste využili pokročilé funkce ZMOD.
 
-Pro firmwarovou retrakci si přečtěte [dokumentaci](FAQ.md#what-is-firmware-retraction) a přidejte do `Profilu filamentu` -> `Pokročilé` -> `Start G-kód filamentu`:
+Pro firmware retrakci si přečtěte [dokumentaci](FAQ.md#what-is-firmware-retraction) a přidejte do `Profilu filamentu` -> `Pokročilé` -> `Start G-kód filamentu`:
 ```
 SET_RETRACTION RETRACT_LENGTH=[filament_retraction_length]
 ```
@@ -266,9 +266,9 @@ Dokumentace se často nečte, ačkoliv 90 % otázek je zde zodpovězeno. Pro ov�
 Tiskárna může pracovat ve dvou režimech:
 
 - S nativní obrazovkou - v tomto případě je téměř veškerá logika ovládána nativní obrazovkou a mnoho funkcí nelze změnit.
-- Bez nativní obrazovky - v tomto případě jsou všechny funkce ovládány zModem.
+- Bez nativní obrazovky - v tomto případě jsou všechny funkce ovládány zMod.
 To neznamená, že musíte obrazovku vypnout nebo ji nahradit jinou.
-V režimu bez nativní obrazovky můžete použít alternativní softwarovou obrazovku GuppyScreen nebo obrazovku úplně vypnout, takže se sama vypne.
+V režimu bez nativní obrazovky můžete použít alternativní softwarovou obrazovku GuppyScreen nebo obrazovku úplně vypnout.
 
 !!! warning
     Nevypínejte obrazovku, dokud plně nerozumíte vyrovnávání podložky, z-offsetu a makrům START_PRINT/END_PRINT.
@@ -422,7 +422,7 @@ Rozdíl mezi `REBOOT` a `FIRMWARE_RESTART` je, že `REBOOT` restartuje Linux a K
 
 ### Přepnul jsem webové rozhraní a teď nic nefunguje
 
-Pokud jste přepnuli rozhraní pomocí makra [WEB](System.md#web) *vychuchol*:
+Pokud jste přepnuli rozhraní pomocí makra [WEB](System.md#web)
 
 1. Stiskněte `Ctrl + F5` nebo `Ctrl + Shift + R` nebo `Option + Command + E`
 2. Pokud problém přetrvává v Orca, stiskněte znovu `Ctrl + F5` nebo `Ctrl + Shift + R` nebo `Option + Command + E`. *liška*
@@ -433,7 +433,7 @@ Pokud jste přepnuli rozhraní pomocí makra [WEB](System.md#web) *vychuchol*:
 
 ---
 
-### Přistupuji k tiskárně přes Orca/prohlížeč a vidím "Vítejte v Moonrakeru"
+### Přistupuji k tiskárně přes Orca/prohlížeč a vidím "Welcome to Moonraker"
 
 ZMOD používá následující porty:
 
@@ -449,14 +449,14 @@ Pro přístup k tiskárně zadejte její IP adresu **bez specifikace portu**. *k
 
 ### Co je to firmwarová retrakce?
 
-V ZMODu má Fluidd/Mainsail posuvníky pro úpravu rychlosti a vzdálenosti firmwarové retrakce. Tyto neovlivňují tisky, pokud není G-kód soubor nakrájen s povolenou firmwarovou retrakcí.
+Ve ZMODu mají Fluidd/Mainsail posuvníky pro nastavení rychlosti a délky retrakce řízené firmwarem. Tyto hodnoty však neovlivní tisk, pokud G-kód nebyl připraven s povolenou retrakcí firmwarem.
 
-Firmwarová retrakce umožňuje upravovat retrakci během tisku bez opětovného krájení.
+Retrakce ve firmware umožňuje měnit délku a rychlost retrakce během tisku, aniž by bylo potřeba znovu generovat G-kód.
 
 Místo příkazů jako `G1 E-.5 F2100` použijte `G10` pro retrakci a `G11` pro zrušení retrakce.
 
 **Jak povolit v Orca:**
-`Nastavení tiskárny` -> `Obecné` -> `Pokročilé` -> Povolit `Použít firmwarovou retrakci`.
+`Nastavení tiskárny` -> `Základní informace` -> `Pokročilé` -> Povolit `Použít retrakce z firmwaru`.
 
 **Jak upravit výchozí nastavení retrakce:**
 Upravte `user.cfg` ve Fluidd (`Konfigurace` -> `mod_data` -> `user.cfg`):
@@ -587,7 +587,7 @@ Odstranění modu obnoví původní logo. Pokud se tak na AD5M nestane:
 
 ---
 
-### Žádný trigger na sondě po plném pohybu
+### No trigger on probe after full movement
 
 Tato chyba se obvykle vyskytuje, pokud osa Z není během měření dostatečně zvednutá.
 
@@ -616,14 +616,14 @@ K čemu je tento senzor?
 
 ---
 
-### Chyba protokolu MCU
+### MCU Protocol error
 
 Zde jsou některé chyby, které závisí na MCU:
 
-- Chyba protokolu MCU
-- Neznámý teplotní senzor flashforge_loadcell
-- Požadovaný příkaz MCU
-- flashforge_loadcell: Požadovaný příkaz MCU 'flashforge_loadcell_h1' není k dispozici
+- MCU Protocol error
+- Unknown temperature sensor flashforge_loadcell
+- Required MCU command
+- flashforge_loadcell: Required MCU command 'flashforge_loadcell_h1' is not available
 
 Podstatou všech těchto chyb je, že verze Klipperu neodpovídá verzi MCU.
 
@@ -656,7 +656,7 @@ Pokud vše ostatní selže a **Klipper nefunguje**:
 
 ---
 
-### Filament došel nebo se zastavil
+### Filament has run out or stopped
 
 Detekován konec filamentu nebo zaseknutí
 
@@ -718,6 +718,7 @@ Toto je vlastnost nativního firmwaru od verze:
 Řešení:
 
 - [Vraťte nativní firmware](Native_FW.md) na verzi **1.1.7** pro AD5X, **3.2.3** pro FF5M/FF5MPro
+nebo
 - [Vypněte nativní displej](System.md#display_off)
 
 ---
