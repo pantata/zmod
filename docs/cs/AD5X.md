@@ -277,22 +277,22 @@ V tomto souboru má každý typ materiálu (PLA, ABS, PETG atd.) seznam hodnot. 
 
 Aby tato nastavení fungovala, musíte **vypnout nativní displej tiskárny** pomocí makra `DISPLAY_OFF`.
 
-1.  **`temp`** — Teplota trysky pro výměnu filamentu. **Výchozí hodnota závisí na typu materiálu.**
-2.  **`filament_drop_length` (Délka vypouštění)**
+1. **`temp`** — Teplota trysky pro výměnu filamentu. **Výchozí hodnota závisí na typu materiálu.**
+2. **`filament_drop_length` (Délka čištění)**
 
-    *   **Jednoduše řečeno:** Kolik milimetrů filamentu tiskárna vytlačí do odpadní nádobky, aby **vyčistila trysku** od předchozí barvy.
-    *   **Tip:** Zvyšte tuto hodnotu, pokud se barvy míchají při výměně cívek. Snižte ji, abyste snížili odpad.
+    - **Jednoduše řečeno:** Kolik milimetrů filamentu tiskárna vytlačí do odpadní nádobky, aby **vyčistila trysku** od předchozí barvy.
+    - **Tip:** Zvyšte tuto hodnotu, pokud se barvy míchají při výměně cívek. Snižte ji, abyste snížili odpad.
 
-3.  **`filament_drop_length_add` (Dodatečné čištění)**
+3. **`filament_drop_length_add` (Dodatečné čištění)**
 
-    *   **Jednoduše řečeno:** Extra délka čištění při přechodu mezi **typy materiálů** (např. z PLA na PETG), nejen barvami.
-    *   **Proč je to potřeba:** Různé materiály se špatně mísí, proto je nutné hlubší čištění trysky.
+    - **Jednoduše řečeno:** Dodatečná délka čištění při přechodu mezi **typy materiálů** (např. z PLA na PETG), nejen barvami.
+    - **Proč je to potřeba:** Různé materiály se špatně mísí, proto je nutné hlubší čištění trysky.
 
-4.  **`nozzle_cleaning_length`** — Délka (v mm) filamentu vytaženého z extruderu při čištění trysky, když se cívka již nepoužívá. **Výchozí: 60 mm.**
+4. **`nozzle_cleaning_length`** — Délka (v mm) filamentu vytaženého z extruderu při čištění trysky, když se cívka již nepoužívá. **Výchozí: 60 mm.**
 
-5.  **`filament_unload_into_tube`** — Kolik filamentu vysunout z modulu 4 v 1, když se extrudér již nepoužívá. **Výchozí: 70 mm.**
+5. **`filament_unload_into_tube`** — Kolik filamentu vysunout z modulu 4 v 1, když se extrudér již nepoužívá. **Výchozí: 70 mm.**
 
-    *   Pokud máte modul 4 v 1 nové verze, zvyšte `filament_unload_into_tube` nebo v krajním případě zvyšte `nozzle_cleaning_length`
+    - Pokud máte modul 4-in-1 nové verze, zvyšte `filament_unload_into_tube` nebo v krajním případě zvyšte `nozzle_cleaning_length`
 
 ---
 
@@ -300,21 +300,26 @@ Aby tato nastavení fungovala, musíte **vypnout nativní displej tiskárny** po
 
 Aby tato nastavení fungovala, musíte **vypnout nativní displej tiskárny** pomocí makra `DISPLAY_OFF`.
 
-*   **`filament_tube_length`** — Celková délka PTFE hadičky od modulu IFS k extruderu. Užitečné pro nestandardní hadičky. **Výchozí: 1000 mm.**
-*   **`filament_unload_before_cutting`** — Vzdálenost zvednutí filamentu **před** řezáním. **Výchozí: 0 mm.**
-*   **`filament_unload_after_cutting`** — Vzdálenost zvednutí filamentu **po** řezání, před přesunem do odpadní nádobky. **Výchozí: 5 mm.**
-*   **`filament_unload_after_drop`** — Vzdálenost retrakce po čištění, aby se zabránilo odkapávání. **Výchozí: 3 mm.**
-*   **`filament_extruder_speed`** — Rychlost (v mm/min), kterou je filament zaváděn do extrudéru. **Výchozí: 300 mm/min (5 mm/s).**
-*   **`filament_ifs_speed`** — Rychlost (v mm/min), kterou pracuje modul IFS. **Výchozí: 12000 mm/min (20 mm/s).**
-*   **`filament_fan_speed`** — Rychlost ventilátoru (0–255) během čištění pro chlazení odkapávání. **Výchozí: 102.**
-*   **`filament_autoinsert_empty_length`** — Délka filamentu zataženého při automatickém vkládání do prázdného extruderu. **Výchozí: 600 mm.**
-*   **`filament_autoinsert_full_length`** — Délka filamentu zataženého při výměně stávajícího filamentu. **Výchozí: 550 mm.**
-*   **`filament_autoinsert_ret_length`** — Vzdálenost retrakce po spuštění senzoru extruderu (pouze prázdný extruder). **Výchozí: 90 mm.**
-*   **`filament_autoinsert_speed`** — Rychlost automatického vkládání (mm/min). **Výchozí: 1200 mm/min (20 mm/s).**
+- **`filament_tube_length`** — Celková délka PTFE hadičky od modulu IFS k extruderu. Užitečné pro nestandardní hadičky. **Výchozí: 1000 mm.**
+- **`filament_unload_before_cutting`** — Vzdálenost zvednutí filamentu **před** řezáním. **Výchozí: 0 mm.**
+- **`filament_unload_after_cutting`** — Vzdálenost zvednutí filamentu **po** řezání, před přesunem do odpadní nádobky. **Výchozí: 5 mm.**
+- **`filament_unload_after_drop`** — Vzdálenost retrakce po čištění, aby se zabránilo odkapávání. **Výchozí: 3 mm.**
+- **`filament_extruder_speed`** — Rychlost (v mm/min), kterou je filament zaváděn do extrudéru. **Výchozí: 300 mm/min (5 mm/s).**
+- **`filament_ifs_speed`** — Rychlost (v mm/min), kterou pracuje modul IFS. **Výchozí: 12000 mm/min (20 mm/s).**
+- **`filament_fan_speed`** — Rychlost ventilátoru (0–255) během čištění pro chlazení odkapávání. **Výchozí: 102.**
+- **`filament_autoinsert_empty_length`** — Délka filamentu zataženého při automatickém vkládání do prázdného extruderu. **Výchozí: 600 mm.**
+- **`filament_autoinsert_full_length`** — Délka filamentu zataženého při výměně stávajícího filamentu. **Výchozí: 550 mm.**
+- **`filament_autoinsert_ret_length`** — Vzdálenost retrakce po spuštění senzoru extruderu (pouze prázdný extruder). **Výchozí: 90 mm.**
 
-**Varování!** Úprava pokročilých parametrů může způsobit poruchy tiskárny, ucpání filamentu nebo poškození hardwaru. Upravujte pouze tehdy, pokud plně rozumíte účelu a potenciálním následkům každého parametru.
+- **`filament_autoinsert_speed`** — Rychlost automatického vkládání (mm/min). **Výchozí: 1200 mm/min (20 mm/s).**
 
-**Klíčový poznatek:** Chcete-li snížit odpad, začněte snížením **`filament_drop_length`** a **`filament_drop_length_add`** pro váš materiál. Nezapomeňte po změnách soubor uložit!
+**Varování!**
+
+Úprava pokročilých parametrů může způsobit poruchy tiskárny, ucpání filamentu nebo poškození hardwaru. Upravujte pouze tehdy, pokud plně rozumíte účelu a potenciálním následkům každého parametru.
+
+**Důležité:**
+
+Chcete-li snížit odpad, začněte snížením **`filament_drop_length`** a **`filament_drop_length_add`** pro váš materiál. Nezapomeňte po změnách soubor uložit!
 
 ## **7. Přidat vlastní typy filamentů**
 
